@@ -40,7 +40,7 @@ sp.on("open", function () {
     io.emit("chat message", "An XBee says: " + data);
     var temp = data.slice(7);
     count++;
-    if(Number(temp) < -20 || Number(temp) > 100){
+    if(Number(temp) < -100 || Number(temp) > 100){
       max--;
     } else{
       sumData += Number(temp);
