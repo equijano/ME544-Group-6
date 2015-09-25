@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.2.2/d3.v3.min.js"></script>
+    <script type="text/javascript" src="./uvcharts.min.js"></script>
+    <script type="text/javascript" src="./canvasjs.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>-->
+  </head>
+
+  <body>
+    <div id="chartContainer" style="height: 300px; width: 100%;">
+    </div>
+<ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+  </body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+</script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+  var socket = io();
+  $('form').submit(function(){
+    socket.emit('chat message', $('#m').val());
+    $('#m').val('');
+    return false;
+  });
+  socket.on('chat message', function(msg){
+    var temp = msg.slice(7);
+    $('#messages').append($('<li>').text(msg));
+    addTimePoint(sensorData, msg.slice(0, 1), Date.now(), Number(temp));
+  });
+</script>
+<script>
+    var chartTitle = " Temperature Readings Over Time";
+    var names = ["SensorA", "SensorB", "SensorC", "SensorD"];
+    var names = ["A", "B", "C", "D"]
+    var sensorData = {};
+    var time = Date.now();
+    sensorData = {}
+
+var addTimePoint = function(dataset, sensorName, timepoint, value){
+  if (!dataset.hasOwnProperty(sensorName)){
+    dataset[sensorName] = [];
+  }
+  dataset[sensorName].push({
+    x: timepoint,
+    y: value
+  });
+  refreshChart();
+}
+
+var compareReadingsByTime = function(readingA,readingB){
+  return readingA.x - readingB.x;
+}
+
+var makeData = function(dataset){
+  var data = [];
+  for (var sensorName in dataset){
+    var subset = makeSubset(dataset, sensorName);
+    data.push(subset);
+  }
+  return data;
+}
+
+var makeSubset = function(dataset, sensorName){
+  var subset = {
+    type: "line",
+    showInLegend: true,
+    lineThickness: 2,
+    name: "sensor " + sensorName,
+    dataPoints: dataset[sensorName].sort(compareReadingsByTime)
+  };
+  return subset;
+}
+
+var renderChart = function(sensorData){
+  var data = makeData(sensorData);
+  var chartParams = {
+    title: {
+      text: chartTitle,
+      fontSize: 15
+    },
+    data: data
+  };
+
+  chartParams = 
+  {
+
+      title:{
+        text: chartTitle,
+        fontSize: 30
+      },
+      animationEnabled: false,
+      axisX:{
+
+        gridColor: "Silver",
+        tickColor: "silver",
+      },                        
+      toolTip:{
+        shared:true
+      },
+      theme: "theme1",
+      axisY: {
+        gridColor: "Silver",
+        tickColor: "silver"
+      },
+      legend:{
+        verticalAlign: "center",
+        horizontalAlign: "right"
+      },
+      data: data,
+      legend:{
+        cursor:"pointer",
+        itemclick:function(e){
+          if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+          }
+          else{
+            e.dataSeries.visible = true;
+          }
+          chart.render();
+        }
+      }
+  };
+  var chart = new CanvasJS.Chart("chartContainer", chartParams);
+  chart.render();
+}
+
+var refreshChart = function(){
+  renderChart(sensorData);
+}
+
+//window.setInterval(addRandomPoint, randomDelay);
+
+</script>
+</html>
