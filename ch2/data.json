@@ -1,1 +1,257 @@
-{"JSChart":{"datasets":[{"type":"line","id":"blue","data":[{"unit":"1443196281276","value":"31.86"},{"unit":"1443196286292","value":"32.62"},{"unit":"1443196913294","value":"30.33"},{"unit":"1443196918310","value":"31.86"},{"unit":"1443197007785","value":"31.86"}]},{"type":"line","id":"orange","data":[{"unit":"1443196281276","value":"31.86"}]},{"type":"line","id":"green","data":[{"unit":"1443196281276","value":"31.86"}]},{"type":"line","id":"purple","data":[{"unit":"1443196281276","value":"31.86"}]},{"type":"line","id":"gray","data":[{"unit":"1443196281276","value":"31.86"}]}],"optionset":[{"set":"setSize","value":"550, 300"},{"set":"setAxisValuesNumberY","value":"5"},{"set":"setAxisNameY","value":"'Temperture/°F'"},{"set":"setIntervalStartY","value":"0"},{"set":"setIntervalEndY","value":"200"},{"set":"setLabelX","value":"[2,'09/24/2015']"},{"set":"setLabelX","value":"[4,'40']"},{"set":"setLabelX","value":"[6,'60']"},{"set":"setLabelX","value":"[8,'80']"},{"set":"setLabelX","value":"[10,'100']"},{"set":"setLabelX","value":"[12,'110']"},{"set":"setLabelX","value":"[14,'120']"},{"set":"setLabelX","value":"[16,'130']"},{"set":"setAxisValuesNumberX","value":"8"},{"set":"setAxisNameX","value":"'Time/s'"},{"set":"setShowXValues","value":"false"},{"set":"setTitleColor","value":"'#454545'"},{"set":"setAxisValuesColor","value":"'#454545'"},{"set":"setLineColor","value":"'#A4D314', 'green'"},{"set":"setLineColor","value":"'#BBBBBB', 'gray'"},{"set":"setLineColor","value":"'#9900CC', 'purple'"},{"set":"setLineColor","value":"'#CC6633', 'orange'"},{"set":"setTooltip","value":"[1,' ']"},{"set":"setTooltip","value":"[2,' ']"},{"set":"setTooltip","value":"[2.8,' ']"},{"set":"setTooltip","value":"[3,' ']"},{"set":"setTooltip","value":"[4,' ']"},{"set":"setTooltip","value":"[5,' ']"},{"set":"setTooltip","value":"[6,' ']"},{"set":"setTooltip","value":"[7,' ']"},{"set":"setTooltip","value":"[8,' ']"},{"set":"setTooltip","value":"[9,' ']"},{"set":"setTooltip","value":"[10,' ']"},{"set":"setTooltip","value":"[11,' ']"},{"set":"setTooltip","value":"[12,' ']"},{"set":"setTooltip","value":"[13,' ']"},{"set":"setFlagColor","value":"'#9D16FC'"},{"set":"setFlagRadius","value":"4"},{"set":"setAxisPaddingRight","value":"100"},{"set":"setLegendShow","value":"true"},{"set":"setLegendPosition","value":"490, 80"},{"set":"setLegendForLine","value":"'blue', 'SensorA'"},{"set":"setLegendForLine","value":"'green', 'SensorB'"},{"set":"setLegendForLine","value":"'orange', 'SensorC'"},{"set":"setLegendForLine","value":"'purple', 'SensorD'"},{"set":"setLegendForLine","value":"'gray', 'Average'"}]}}
+{
+	"JSChart":
+    {
+    	"datasets":[
+        {
+        	"type":"line",
+            "id":"blue",
+            "data":[
+                {
+                	"unit":"1443196281276",
+                	"value":"31.86"
+                },
+                {
+                	"unit":"1443196286292",
+                	"value":"32.62"
+                },
+                {
+                	"unit":"1443196913294",
+                	"value":"30.33"
+                },
+                {
+                	"unit":"1443196918310",
+                	"value":"31.86"
+                },
+                {
+                	"unit":"1443197007785",
+                	"value":"31.86"
+                }
+            ]
+        },
+        {
+         	"type":"line",
+         	"id":"orange",
+         	"data":[
+         	    {
+         	    	"unit":"1443196281276",
+         	    	"value":"31.86"
+         	    }
+         	]
+        },
+        {
+        	"type":"line",
+        	"id":"green",
+        	"data":[
+        	    {
+        	    	"unit":"1443196281276",
+        	    	"value":"31.86"
+        	    }
+        	]
+        },
+        {
+        	"type":"line",
+        	"id":"purple",
+        	"data":[
+        	    {
+        	    	"unit":"1443196281276",
+        	    	"value":"31.86"
+        	    }
+        	]
+        },
+        {
+        	"type":"line",
+        	"id":"gray",
+        	"data":[
+        	    {
+        	    	"unit":"1443196281276",
+        	    	"value":"31.86"
+        	    }
+        	]
+        }],
+        "optionset":[
+        {
+        	"set":"setSize",
+        	"value":"550, 300"
+        },
+        {
+        	"set":"setAxisValuesNumberY",
+        	"value":"5"
+        },
+        {
+        	"set":"setAxisNameY",
+        	"value":"'Temperture/°F'"
+        },
+        {
+        	"set":"setIntervalStartY",
+        	"value":"0"
+        },
+        {
+        	"set":"setIntervalEndY",
+        	"value":"200"
+        },
+        {
+        	"set":"setLabelX",
+        	"value":"[2,'09/24/2015']"
+        },
+        {
+        	"set":"setLabelX",
+        	"value":"[4,'40']"
+        },
+        {
+        	"set":"setLabelX",
+        	"value":"[6,'60']"
+        },
+        {
+        	"set":"setLabelX",
+        	"value":"[8,'80']"
+        },
+        {
+        	"set":"setLabelX",
+        	"value":"[10,'100']"
+        },
+        {
+        	"set":"setLabelX",
+        	"value":"[12,'110']"
+        },
+        {
+        	"set":"setLabelX",
+        	"value":"[14,'120']"
+        },
+        {
+        	"set":"setLabelX",
+        	"value":"[16,'130']"
+        },
+        {
+        	"set":"setAxisValuesNumberX",
+        	"value":"8"
+        },
+        {
+        	"set":"setAxisNameX",
+        	"value":"'Time/s'"
+        },
+        {
+        	"set":"setShowXValues",
+        	"value":"false"
+        },
+        {
+        	"set":"setTitleColor",
+        	"value":"'#454545'"
+        },
+        {
+        	"set":"setAxisValuesColor",
+        	"value":"'#454545'"
+        },
+        {
+        	"set":"setLineColor",
+        	"value":"'#A4D314', 'green'"
+        },
+        {
+        	"set":"setLineColor",
+        	"value":"'#BBBBBB', 'gray'"
+        },
+        {
+        	"set":"setLineColor",
+        	"value":"'#9900CC', 'purple'"
+        },
+        {
+        	"set":"setLineColor",
+        	"value":"'#CC6633', 'orange'"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[1,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[2,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[2.8,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[3,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[4,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[5,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[6,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[7,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[8,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[9,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[10,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[11,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[12,' ']"
+        },
+        {
+        	"set":"setTooltip",
+        	"value":"[13,' ']"
+        },
+        {
+        	"set":"setFlagColor",
+        	"value":"'#9D16FC'"
+        },
+        {
+        	"set":"setFlagRadius",
+        	"value":"4"
+        },
+        {
+        	"set":"setAxisPaddingRight",
+        	"value":"100"
+        },
+        {
+        	"set":"setLegendShow",
+        	"value":"true"
+        },
+        {
+        	"set":"setLegendPosition",
+        	"value":"490, 80"
+        },
+        {
+        	"set":"setLegendForLine",
+        	"value":"'blue', 'SensorA'"
+        },
+        {
+        	"set":"setLegendForLine",
+        	"value":"'green', 'SensorB'"
+        },
+        {
+        	"set":"setLegendForLine",
+        	"value":"'orange', 'SensorC'"
+        },
+        {
+        	"set":"setLegendForLine",
+        	"value":"'purple', 'SensorD'"
+        },
+        {
+        	"set":"setLegendForLine",
+        	"value":"'gray', 'Average'"
+        }
+    ]}
+}
