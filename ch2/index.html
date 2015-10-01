@@ -31,6 +31,7 @@
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
+  var d = Date.now();
   var socket = io();
   $('form').submit(function(){
     socket.emit('chat message', $('#m').val());
@@ -40,13 +41,13 @@
   socket.on('chat message', function(msg){
     var temp = msg.slice(7);
     $('#messages').append($('<li>').text(msg));
-    addTimePoint(sensorData, msg.slice(0, 1), Date.now(), Number(temp));
+    addTimePoint(sensorData, msg.slice(0, 1), ((Date.now() - d)/1000), Number(temp));
   });
 </script>
 <script>
     var chartTitle = " Temperature Readings Over Time";
-    var names = ["SensorA", "SensorB", "SensorC", "SensorD"];
-    var names = ["A", "B", "C", "D"]
+    var names = ["SensorA", "SensorB", "SensorC", "SensorD", "Aversge"];
+    var names = ["A", "B", "C", "D", "V"]
     var sensorData = {};
     var time = Date.now();
     sensorData = {}

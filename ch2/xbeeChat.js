@@ -4,6 +4,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var array = ["null", "null", "null", "null"];
+var count = 0;
 var fs = require('fs');
 app.use(express.static('public'));
 var portName = process.argv[2],
@@ -41,34 +42,34 @@ sp.on("open", function () {
   console.log('open');
   sp.on('data', function(data) {
     console.log('data received: ' + data);
-    //io.emit("chat message", "An XBee says: " + data);
     io.emit("chat message", data);
     if(data.indexOf("A") == 0){
-      var d = Date.now();
       array[0] = data.slice(7);
-      updateData(Number(data.slice(7)), d, "0")
     }
     else if(data.indexOf("B") == 0){
       array[1] = data.slice(7);
-      var d = Date.now();
-      updateData(Number(data.slice(7)), d, "1")
     }
     else if(data.indexOf("C") == 0){
       array[2] = data.slice(7);
-      var d = Date.now();
-      updateData(Number(data.slice(7)), d, "2")
     }
     else if(data.indexOf("D") == 0){
       array[3] = data.slice(7);  
-      var d = Date.now();
-      updateData(Number(data.slice(7)), d, "3")
     }
     if(array.indexOf("null") == -1){
       sumData = Number(array[0]) + Number(array[1]) + Number(array[2]) + Number(array[3]);
       io.emit('chat message', "V Temp:" + Number(sumData/4));
+      var date = (new Date()).toString();
+      var d = date.slice(0, 23);
+      count++;
+      if((count % 5) == 0){
+        console.log("input");
+      	updateData((Number(sumData/4)), d, "4");
+        updateData((Number(array[0])), d, "0");
+        updateData((Number(array[1])), d, "1");
+        updateData((Number(array[2])), d, "2");
+        updateData((Number(array[3])), d, "3");
+      }
       array = ["null", "null", "null", "null"];
-      var d = Date.now();
-      updateData((Number(sumData/4)), d, "4");
     }
   });
 });
