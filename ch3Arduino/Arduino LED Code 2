@@ -1,12 +1,13 @@
 #include <SoftwareSerial.h>
 SoftwareSerial XBee(2, 3); // RX, TX
 int sensorPin = 13;
+int state = 0;
 void setup() {
   // put your setup code here, to run once:
   XBee.begin(9600);
   Serial.begin(9600);
   pinMode(13, OUTPUT);
-  digitalWrite(sensorPin, LOW);
+  digitalWrite(sensorPin, state);
   XBee.write("Enter 0 to turn LED on, 1 to turn LED off, or 2 to check the current state of the LED");
 }
 
@@ -25,26 +26,27 @@ void loop() {
     //XBee.println(input);
     //input = 1;
     if(input == '0'){
-      digitalWrite(sensorPin, LOW);
-      delay(1000);
+      state = 0;
+      digitalWrite(sensorPin, state);
+      delay(500);
       XBee.write(" LED is on");
       }
         if(input == '1') {
-          digitalWrite(sensorPin, HIGH);
-          delay(1000);
+          state = 1;
+          digitalWrite(sensorPin, state);
+          delay(500);
           XBee.write(" LED is off");
         }
         if(input == '2') {
           Serial.print("State: ");
-          Serial.println(digitalRead(13));
+          Serial.println(state);
           XBee.print("State:");
-          XBee.println(digitalRead(13));;
+          XBee.println(state);
         }
-       
-      
   }
 
    //digitalWrite(sensorPin,comm);
-   delay(1000);
+   delay(500);
      
 }
+
