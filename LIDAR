@@ -23,7 +23,7 @@ int sensorPinsArraySize = 2; // The length of the array
 void setup(){
   Serial.begin(115200); //Opens serial connection at 115200bps.     
   I2c.begin(); // Opens & joins the irc bus as master
-  delay(100); // Waits to make sure everything is powered up before sending or receiving data  
+  delay(100); // Waits to make sure everything is powered up before sending or receiving data   
   I2c.timeOut(50); // Sets a timeout to ensure no locking up of sketch if I2C communication fails
   
   for (int i = 0; i < sensorPinsArraySize; i++){
