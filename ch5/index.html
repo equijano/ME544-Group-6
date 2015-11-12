@@ -34,15 +34,7 @@
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
-    <script>
-    var id = document.getElementById("text").value;
-    alert("aa");
-    var table = document.getElementById("t");
-    var row = table.rows[1];
-    var cell = row.cells[0];
-    var cellValue = Number(cell.innerHTML);
-    cell.style.backgroundColor = "red";
-    </script>
+    
 <script src="/socket.io/socket.io.js"></script>
 <script>
   var socket = io();
@@ -52,14 +44,40 @@
 <script>
   var socket = io();
   $('form').submit(function(){
+    for(var i = 0; i < 3; i++){
+      for(var j = 0; j < 3; j++){
+        var table = document.getElementById("t");
+        var row = table.rows[i];
+        var cell = row.cells[j];
+        cell.style.backgroundColor = "white";
+      }
+    }
     socket.emit('chat message', $('#m').val());
+    var id = document.getElementById("text").value;
+    alert($('#m').val());
+    var i= parseInt($('#m').val());
+    var a=Math.floor(i/3);
+    alert(a);
+    var b=i%3;
+    //alert(i);
     $('#m').val('');
+    
+    
+    var table = document.getElementById("t");
+    var row = table.rows[a];
+    var cell = row.cells[b];
+    var cellValue = Number(cell.innerHTML);
+    cell.style.backgroundColor = "red";
     return false;
   });
   socket.on('chat message', function(msg){
     $('#text').text(msg);
-    alert("id");
+    //alert("id");
   });
+  
 </script>
+<script>
+    
+    </script>
   </body>
 </html>
