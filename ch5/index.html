@@ -1,83 +1,98 @@
-<!doctype html>
 <html>
-  <head>
-    <title>Socket.IO chat</title>
-  </head>
-  <body>
-    <table id="t">
-       <tr>
-          <td id="1">-</td>
-          <td id="2">-</td>
-          <td id="3">-</td>
-          <td id="4">-</td>
-       </tr>
-          <td id="5">-</td>
-          <td id="6">-</td>
-          <td id="7">-</td>
-          <td id="8">-</td>
-       <tr>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-       </tr>
-       <tr>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-       </tr>
-    </table>
-    <div id = "output">
-        <textarea id="text"></textarea>
+<head>
+    <title>GROUP 6</title>
+    <style type="text/css">
+        .auto-style4 {
+            height: 150px;
+            width: 150px;
+        }
+        #t {
+            height: 150px;
+        }
+        #text {
+            width: 136px;
+            height: 30px;
+            background-color: #E2E4E9;
+        }
+      
+        td {
+            text-align:center;
+            font-size:30px;
+        }
+ 
+        .auto-style5 {
+            color: #FF0000;
+            font-size : 30px;
+        }
+ 
+        .auto-style6 {
+            color: #FF66FF;
+        }
+ 
+        .auto-style7 {
+            font-size: 35px;
+            color: #666699;
+        }
+
+        .box {
+            color:#666699;
+            font-size:25px;
+        }
+
+        </style>
+</head>
+<body bgcolor="#E2E4E9" style="height: 671px">
+    <div align ="center" class="auto-style5">
+        <br />
+        <span class="auto-style7">Simplified PHO 117 Map</span><span class="auto-style6"><br />
+        </span><br />
     </div>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-    
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io();
-</script>
-<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-<script>
-  var socket = io();
-  $('form').submit(function(){
-    for(var i = 0; i < 3; i++){
-      for(var j = 0; j < 3; j++){
-        var table = document.getElementById("t");
-        var row = table.rows[i];
-        var cell = row.cells[j];
-        cell.style.backgroundColor = "white";
-      }
-    }
-    socket.emit('chat message', $('#m').val());
-    var id = document.getElementById("text").value;
-    alert($('#m').val());
-    var i= parseInt($('#m').val());
-    var a=Math.floor(i/3);
-    alert(a);
-    var b=i%3;
-    //alert(i);
-    $('#m').val('');
-    
-    
-    var table = document.getElementById("t");
-    var row = table.rows[a];
-    var cell = row.cells[b];
-    var cellValue = Number(cell.innerHTML);
-    cell.style.backgroundColor = "red";
-    return false;
-  });
-  socket.on('chat message', function(msg){
-    $('#text').text(msg);
-    //alert("id");
-  });
-  
-</script>
-<script>
-    
+    <table id="t" border ="10" align ="center" background="D:/BU/Networking Physical World/EC544_demos-master/demos/rssi/pic1.jpg" >
+        <tr>
+            <td class="auto-style4">0</td>
+            <td class="auto-style4">1</td>
+            <td class="auto-style4">2</td>
+        </tr>
+        <td class="auto-style4">3</td>
+        <td class="auto-style4">4</td>
+        <td class="auto-style4">5</td>
+        <tr>
+            <td class="auto-style4">6</td>
+            <td class="auto-style4">7</td>
+            <td class="auto-style4">8</td>
+        </tr>
+        </tr>
+    </table>
+    <div id="output" align="center">
+        <br />
+        <textarea id="text" name="S1" text-align="center" class="box"></textarea></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
     </script>
-  </body>
-</html>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        var socket = io();
+        socket.on('chat message', function (msg) {
+            $('#text').text(msg);
+            for (var i = 0; i < 3; i++) {
+                for (var j = 0; j < 3; j++) {
+                    var table = document.getElementById("t");
+                    var row = table.rows[i];
+                    var cell = row.cells[j];
+                    cell.style.backgroundColor = "#E2E4E9";
+                }
+            }
+            var id = document.getElementById("text").value;
+            var i = parseInt(id);
+            var a = Math.floor(i / 3);
+            var b = i % 3;
+            var table = document.getElementById("t");
+            var row = table.rows[a];
+            var cell = row.cells[b];
+            cell.style.backgroundColor = "red";
+        });
+    </script>
+</body>
+<html>
