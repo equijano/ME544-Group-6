@@ -1,0 +1,58 @@
+#include <SoftwareSerial.h>
+SoftwareSerial XBee(2, 3); // RX, TX
+
+
+int input = 0;
+int ascii_offset = 48;
+
+int INFECTED = 0;
+int CURED = 5;
+int SUPER_CURED = 6;
+int ALIVE = 7;
+int ELECTION = 8;
+
+
+int state = CURED; // starts out healthy
+boolean Leader_Alive = false;
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize digital pin 13 as an output.
+  pinMode(13, OUTPUT);
+  Serial.begin(9600);
+  XBee.begin(9600);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+//  digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
+//  delay(1000);              // wait for a second
+//  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000);              // wait for a second
+  Leader_Alive = false;
+  while(XBee.available() > 0) {
+    input = XBee.read();
+    
+    input = input - ascii_offset; //converts to the 0,1,2,3 value
+    
+    //check if the Leader is alive
+    if(input == ALIVE){
+      Leader_Alive = true;
+    }
+    
+    if(state == INFECTED && input == CURED){
+      state = SUPER_CURED;
+    }
+    else if(state == CURED && input == INFECTED){
+      state = INFECTED; 
+    }
+  }
+  Serial.print("STATE: ");
+  Serial.print(state);
+  Serial.print(",  LEADER: ");
+  Serial.print(Leader_Alive);
+  Serial.println("");
+  if (state == SUPER_CURED){
+   state = CURED; 
+  }
+}
