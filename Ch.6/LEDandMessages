@@ -1,0 +1,117 @@
+#include <SoftwareSerial.h>
+SoftwareSerial XBee(2, 3); // RX, TX
+
+
+int input = 0;
+int ascii_offset = 48;
+
+int INFECTED = 0;
+int CURED = 5;
+int SUPER_CURED = 6;
+int ALIVE = 7;
+int ELECTION = 8;
+
+int switchstate = 0;  // initial state of button
+
+
+int state = CURED; // starts out healthy
+boolean Leader_Alive = false;
+boolean Leader = false;
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize digital pin 13 as an output.
+  Serial.begin(9600);
+  XBee.begin(9600);
+  
+  // declare the LED pins as outputs 
+  pinMode(4,OUTPUT); // red LED = infected
+  pinMode(5,OUTPUT); // green LED = cured/healthy
+  pinMode(6,OUTPUT); // blue LED = leader (always healthy)
+
+  // declare the switch pin as an input   
+  pinMode(8,INPUT); //button   
+  
+  
+  
+}
+
+// the loop function runs over and over again forever
+void loop() {
+//  digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
+//  delay(1000);              // wait for a second
+//  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
+  if (Leader){
+    delay(50);
+    XBee.print(ALIVE);
+    digitalWrite(4, LOW);  // red off
+    digitalWrite(5, LOW); // green off
+    digitalWrite(6, HIGH);  // blue on
+  }
+  else{
+    delay(1000);              // wait for a second to listen for inputs
+    Leader_Alive = false;
+    while(XBee.available() > 0) {
+      input = XBee.read();
+      
+      input = input - ascii_offset; //converts to the 0,1,2,3 value
+      
+      //check if the Leader is alive
+      if(input == ALIVE){
+        Leader_Alive = true;
+      }
+      
+      if(state == INFECTED && input == CURED){
+        state = SUPER_CURED;
+      }
+      else if(state == CURED && input == INFECTED){
+        state = INFECTED; 
+      }
+    }
+    
+    if(state == CURED) {
+        digitalWrite(4, LOW);  // red off
+        digitalWrite(5, HIGH); // green on
+        digitalWrite(6, LOW);  // blue off
+    }
+    else if(state == INFECTED) {
+        digitalWrite(4, HIGH);  // red on
+        digitalWrite(5, LOW); // green off
+        digitalWrite(6, LOW);  // blue off
+        XBee.print(INFECTED);
+        delay(1000);
+    }
+    
+    else if(state == SUPER_CURED){ 
+      //add line for not receiving infection messages
+      XBee.println(CURED);  // send cure message to other nodes
+      delay(500);
+      XBee.println(CURED);  // send cure message to other nodes
+      delay(500);
+      XBee.println(CURED);  // send cure message to other nodes
+      delay(500);
+      XBee.println(CURED);  // send cure message to other nodes
+      delay(500);
+      XBee.println(CURED);  // send cure message to other nodes
+      delay(500);
+      XBee.println(CURED);  // send cure message to other nodes
+      delay(500);
+      state = CURED; // transition to cured state (not immune to infection messages) after 3 seconds
+    } 
+    
+    if (Leader_Alive == false){
+     //Do relection 
+    }
+    
+    switchstate = digitalRead(8);
+    if (switchstate == LOW) {  // if button is pressed on node, change state to infected
+        state = INFECTED;
+      }
+    
+    Serial.print("STATE: ");
+    Serial.print(state);
+    Serial.print(",  LEADER: ");
+    Serial.print(Leader_Alive);
+    Serial.println("");
+  }
+}
