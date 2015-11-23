@@ -15,7 +15,7 @@ int switchstate = 0;  // initial state of button
 
 int state = CURED; // starts out healthy
 boolean Leader_Alive = false;
-boolean Leader = true;
+boolean Leader = false;
 
 int MAX_Leader_Count = 10;
 int Leader_Count = 0;
@@ -45,7 +45,7 @@ void loop() {
 //  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
   if (Leader){
     XBee.write(ALIVE);
-    delay(500);
+    delay(1000);
     digitalWrite(4, LOW);  // red off
     digitalWrite(5, LOW); // green off
     digitalWrite(6, HIGH);  // blue on
@@ -88,24 +88,19 @@ void loop() {
         digitalWrite(4, HIGH);  // red on
         digitalWrite(5, LOW); // green off
         digitalWrite(6, LOW);  // blue off
-        XBee.print(INFECTED);
+        XBee.write(INFECTED);
         delay(1000);
     }
     
     else if(state == SUPER_CURED){ 
       //add line for not receiving infection messages
-      XBee.println(CURED);  // send cure message to other nodes
-      delay(500);
-      XBee.println(CURED);  // send cure message to other nodes
-      delay(500);
-      XBee.println(CURED);  // send cure message to other nodes
-      delay(500);
-      XBee.println(CURED);  // send cure message to other nodes
-      delay(500);
-      XBee.println(CURED);  // send cure message to other nodes
-      delay(500);
-      XBee.println(CURED);  // send cure message to other nodes
-      delay(500);
+      XBee.write(CURED);  // send cure message to other nodes
+      delay(1000);
+      XBee.write(CURED);  // send cure message to other nodes
+      delay(1000);
+      XBee.write(CURED);  // send cure message to other nodes
+      delay(1000);
+      XBee.write(CURED);  // send cure message to other nodes
       state = CURED; // transition to cured state (not immune to infection messages) after 3 seconds
     } 
     
