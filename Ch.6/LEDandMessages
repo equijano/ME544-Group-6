@@ -42,7 +42,7 @@ void loop() {
 //  delay(1000);              // wait for a second
 //  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
   if (Leader){
-    delay(50);
+    //delay(50);
     XBee.print(ALIVE);
     digitalWrite(4, LOW);  // red off
     digitalWrite(5, LOW); // green off
