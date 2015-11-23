@@ -3,7 +3,6 @@ SoftwareSerial XBee(2, 3); // RX, TX
 
 
 int input = 0;
-int ascii_offset = 48;
 
 int INFECTED = 0;
 int CURED = 5;
@@ -16,7 +15,10 @@ int switchstate = 0;  // initial state of button
 
 int state = CURED; // starts out healthy
 boolean Leader_Alive = false;
-boolean Leader = false;
+boolean Leader = true;
+
+int MAX_Leader_Count = 10;
+int Leader_Count = 0;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
@@ -42,22 +44,29 @@ void loop() {
 //  delay(1000);              // wait for a second
 //  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
   if (Leader){
-    //delay(50);
-    XBee.print(ALIVE);
+    XBee.write(ALIVE);
+    delay(500);
     digitalWrite(4, LOW);  // red off
     digitalWrite(5, LOW); // green off
     digitalWrite(6, HIGH);  // blue on
+    
+    switchstate = digitalRead(8);
+    if (switchstate == LOW) {  // if button is pressed on node, change state to infected
+         XBee.write(CURED);
+      }
   }
   else{
     delay(1000);              // wait for a second to listen for inputs
-    Leader_Alive = false;
+    //Leader_Alive = false;
     while(XBee.available() > 0) {
       input = XBee.read();
       
-      input = input - ascii_offset; //converts to the 0,1,2,3 value
+      Serial.print("Input:  ");
+      Serial.println(input);
       
       //check if the Leader is alive
       if(input == ALIVE){
+        Leader_Count = 0;
         Leader_Alive = true;
       }
       
@@ -68,6 +77,7 @@ void loop() {
         state = INFECTED; 
       }
     }
+    
     
     if(state == CURED) {
         digitalWrite(4, LOW);  // red off
@@ -99,7 +109,9 @@ void loop() {
       state = CURED; // transition to cured state (not immune to infection messages) after 3 seconds
     } 
     
-    if (Leader_Alive == false){
+    Leader_Count = Leader_Count + 1;
+    if (Leader_Count > 10){
+      Leader_Alive = false;
      //Do relection 
     }
     
