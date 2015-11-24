@@ -30,9 +30,11 @@ io.on('connection', function(socket){
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
+
 var sumData = 0;
 var count = 0;
 var max = 4;
+
 sp.on("open", function () {
   console.log('open');
   sp.on('data', function(data) {
@@ -41,11 +43,13 @@ sp.on("open", function () {
     io.emit("chat message", data);
     var temp = data.slice(7);
     count++;
+
     if(Number(temp) < -100 || Number(temp) > 100){
       max--;
     } else{
       sumData += Number(temp);
     }
+
     //io.emit("chat message", "An XBee says: " + temp);
     if(count%4 == 0){
       io.emit("chat message", "The average temperature is: " + ((Number(sumData))/(Number(max))).toFixed(2));
