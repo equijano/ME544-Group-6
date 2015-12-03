@@ -151,7 +151,8 @@ void sendTx(ZBTxRequest zbTx){
   }
 }
 
-void processResponse(int data){
+int processResponse(int data){
+  int clocation;
   if (xbee.getResponse().isAvailable()) {
       // got something
            
@@ -177,16 +178,16 @@ void processResponse(int data){
         Serial.println(rx.getPacketLength(), DEC);*/
 
          for (int i = 0; i < rx.getDataLength(); i++) {
-          location += rx.getData()[i]; 
+          clocation += rx.getData()[i]; 
           /*Serial.print("payload [");
           Serial.print(i, DEC);
           Serial.print("] is ");
           Serial.println(rx.getData()[i], HEX);*/
         }
         /** IMPORTANT **/
-        Serial.print("Location: ");
+        /*Serial.print("Location: ");
         Serial.println(location);
-        location = 0;
+        location = 0;*/
        /*for (int i = 0; i < xbee.getResponse().getFrameDataLength(); i++) {
         Serial.print("frame data [");
         Serial.print(i, DEC);
@@ -211,11 +212,17 @@ void processResponse(int data){
       Serial.print("error code:");
       Serial.println(xbee.getResponse().getErrorCode());
     }
+    return clocation;
 }
 
 // continuously reads packets, looking for ZB Receive or Modem Status
 void loop() {
     xbee.readPacket();
     //If parameter equals to 1, send rssi; else send parameter value
-    processResponse(12);
+    location = processResponse(12);
+    if(location != 0){
+      Serial.print("location");
+      Serial.println(location);
+      location = 0;
+    }
 }

@@ -10,7 +10,7 @@ var XBeeAPI = new xbee_api.XBeeAPI({
 });
 
 var portName = process.argv[2];
-
+var location = "0";
 var sampleDelay = 3000;
 
 
@@ -31,7 +31,7 @@ var RSSIRequestPacket = {
   destination64: "000000000000ffff",
   broadcastRadius: 0x01,
   options: 0x00,
-  data: "test"
+  data: location
 }
 
 var requestRSSI = function(){
@@ -44,12 +44,13 @@ sp.on("open", function () {
   setInterval(requestRSSI, sampleDelay);
 });
 
-var reading = ["null", "null", "null", "null"];
+var reading = ["null", "null", "null"];
 
 XBeeAPI.on("frame_object", function(frame) {
   if (frame.type == 144){
-    //console.log("Beacon ID: " + frame.data[1] + ", RSSI: " + (frame.data[0]));
-    if(frame.data[1].indexOf("1") == 0){
+    console.log("Beacon ID: " + frame.data[1] + ", RSSI: " + (frame.data[0]));
+    location = frame.data[0];
+    /*if(frame.data[1].indexOf("1") == 0){
       reading[0] = frame.data[0];
     }
     else if(frame.data[1].indexOf("2") == 0){
@@ -58,15 +59,13 @@ XBeeAPI.on("frame_object", function(frame) {
     else if(frame.data[1].indexOf("3") == 0){
       array[2] = frame.data[0];
     }
-    else if(frame.data[1].indexOf("4") == 0){
-      array[3] = frame.data[0];  
-    }
   }
   if(reading.indexOf("null") == -1){
       var r = getPosition(reading, cor);
       console.log(r);
-      array = ["null", "null", "null", "null"];
-    }
+      location = r;
+      array = ["null", "null", "null";
+  }*/
 });
 
 app.get('/', function(req, res){
@@ -86,22 +85,6 @@ io.on('connection', function(socket){
     sp.write(msg + "\n");
   });
 });
-/*var aa = [1, 2, 3, 4];
-var ab = [1, 2, 3, 4];
-var ac = [1, 2, 3, 4];
-var ad = [1, 2, 3, 4];
-var ba = [1, 2, 3, 4];
-var bb = [1, 2, 3, 4];
-var bc = [1, 2, 3, 4];
-var bd = [1, 2, 3, 4];
-var ca = [1, 2, 3, 4];
-var cb = [1, 2, 3, 4];
-var cc = [1, 2, 3, 4];
-var cd = [1, 2, 3, 4];
-var da = [1, 2, 3, 4];
-var db = [1, 2, 3, 4];
-var dc = [1, 2, 3, 4];
-var dd = [1, 2, 3, 4];*/
 
 var cor = [
   [1, 2, 3, 4],
@@ -139,20 +122,4 @@ function getPosition(reading, coor) {
     }
   }
   return length[1];
-  /*var saa = getDistance(reading, aa);
-  var sab = getDistance(reading, ab);
-  var sac = getDistance(reading, ac);
-  var sad = getDistance(reading, ad);
-  var sba = getDistance(reading, ba);
-  var sbb = getDistance(reading, bb);
-  var sbc = getDistance(reading, bc);
-  var sbd = getDistance(reading, bd);
-  var sca = getDistance(reading, ca);
-  var scb = getDistance(reading, cb);
-  var scc = getDistance(reading, cc);
-  var scd = getDistance(reading, cd);
-  var sda = getDistance(reading, da);
-  var sdb = getDistance(reading, db);
-  var sdc = getDistance(reading, dc);
-  var sdd = getDistance(reading, dd);*/
 }

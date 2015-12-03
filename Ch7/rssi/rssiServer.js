@@ -24,12 +24,13 @@ sp = new SerialPort.SerialPort(portName, portConfig);
 
 //Create a packet to be sent to all other XBEE units on the PAN.
 // The value of 'data' is meaningless, for now.
+var location = 1;
 var RSSIRequestPacket = {
   type: C.FRAME_TYPE.ZIGBEE_TRANSMIT_REQUEST,
   destination64: "000000000000ffff",
   broadcastRadius: 0x01,
   options: 0x00,
-  data: "2"
+  data: "1"
 }
 
 var requestRSSI = function(){
