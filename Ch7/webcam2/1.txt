@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"> 
+    <head>
+        <meta charset="UTF-8" content="text/html">
+        <meta content=""
+        <title>camera测试</title>
+        <style type="text/css">
+            body{
+                background:rgba(36, 171, 230, 0.95);
+            }
+            #snap{
+                margin:0 auto;
+            }
+            #video,#canvas{
+                margin:20px 30%;
+            }
+            #snap{
+                display:block;
+                width:120px;
+                height:40px;
+                border-radius:5px;
+                color:hsla(0, 8%, 29%,1);
+                font-size:1em;
+                text-shadow:1px 1px 1px rgba(120,120,120,0.6);
+                background:#22986b;
+            }
+        </style>
+    </head>
+    <body>
+        <section>
+        <video id="video" width="640" height="480" autoplay></video>
+        <button id="snap">Snap Photo</button>
+        <canvas id="canvas" width="640" height="480"></canvas>
+        </section>
+    </body>
+    <script type="application/javascript">
+        /**
+          @description 打开摄像头并抓图 仅限于chrome21+ Opera12+ firefox18+ 遨游浏览器
+  (桌面版)*/
+        //及时函数
+        (function() {
+            'use strict';
+            var snap = document.getElementById("snap");
+            window.addEventListener("DOMContentLoaded", function() {
+                var canvas = document.getElementById("canvas"),
+                    context = canvas.getContext("2d"),
+                    video = document.getElementById("video"),
+                    videoObj = {
+                        "video": true
+                    },
+                    //回调函数
+                    errBack = function(error) {
+                        console.log("Video capature error: ", error.code);
+                    };
+                //w3c  标准
+                if (navigator.getUserMedia) {
+                    navigator.getUserMedia(videoObj, function(stream) {
+                        video.src = stream;
+                        video.play();
+                    }, errBack);
+                }
+                 //webkit 内核的
+                 else if (navigator.webkitGetUserMedia) {
+                    navigator.webkitGetUserMedia(videoObj, function(stream) {
+                        video.src = window.webkitURL.createObjectURL(stream);
+                        video.play();
+                    }, errBack);
+                }
+                //添加点击按钮事件 来实现抓图
+                snap.addEventListener("click", function() {
+                    context.drawImage(video, 0, 0, 640, 480);
+                });
+            }, false);
+        }());
+    </script>
+</html>
