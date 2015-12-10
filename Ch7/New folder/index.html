@@ -8,13 +8,13 @@
 <style>
 #container {
     margin: 0px auto;
-    width: 500px;
-    height: 375px;
+    width: 700px;
+    height: 500px;
     border: 10px #333 solid;
 }
 #videoElement {
-    width: 500px;
-    height: 375px;
+    width: 700px;
+    height: 500px;
     background-color: #666;
 }
 </style>
@@ -40,34 +40,31 @@
         .auto-style5 {
             color: #FF0000;
             font-size : 30px;
-            background-image:url("background.jpg");
         }
  
         .auto-style6 {
             color: #FF66FF;
-            background-image:url("background.jpg");
         }
  
         .auto-style7 {
             font-size: 35px;
             color: #666699;
-            background-image:url("background.jpg");
         }
 
         .box {
             color:#666699;
             font-size:25px;
         }
-        body{background-image:url("background.jpg");}
+        }
         </style>
 </head>
-<body background-image:url("background.jpg");>
-    <div align ="center" class="auto-style5" background-image:url("background.jpg");>
+<body>
+    <div align ="center" class="auto-style5" >
         <br />
         <span class="auto-style7">Remote Control</span><span class="auto-style6"><br />
         </span><br />
     </div>
-    <table id="t" border ="10" style="position:absolute;width:500px;height:200px;top:60px;right:70px">
+    <table id="t" border ="10" style="position:absolute;width:500px;height:200px;top:150px;left:150px">
         <tr>
             <td class="auto-style4">0</td>
             <td class="auto-style4">1</td>
@@ -85,7 +82,7 @@
     </table>
     <div id="output" align="center">
         <br />
-        <textarea id="text" name="S1" style="position:absolute;top:500px;right:600px" class="box"></textarea></div>
+        <textarea id="text" name="S1" style="position:absolute;top:650px;left:300px" class="box"></textarea></div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
@@ -123,13 +120,12 @@
             cell.style.backgroundColor = "red";
         });
     </script>
-    <div id="container" style="position:absolute;width:500px;bottom:20px;right:70px">
+    <div id="container" style="position:absolute;width:700px;top:150px;right:200px">
     <video autoplay="true" id="videoElement">
      
     </video>
 </div>
 <script>
-//alert("sb");
     var video = document.querySelector("#videoElement");
  
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
@@ -138,12 +134,10 @@ if (navigator.getUserMedia) {
     navigator.getUserMedia({video: true}, handleVideo, videoError);
 }
 function handleVideo(stream) {
-    alert("sb");
     video.src = window.URL.createObjectURL(stream);
 }
  
 function videoError(e) {
-    alert("sb");
     // do something
 }
 </script>

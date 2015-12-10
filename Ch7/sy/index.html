@@ -1,0 +1,219 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+<meta content="stuff, to, help, search, engines, not" name="keywords">
+<meta content="What this page is about." name="description">
+<meta content="Display Webcam Stream" name="title">
+<title>Remote Control</title>
+<style>
+#container {
+    margin: 0px auto;
+    width: 500px;
+    height: 375px;
+    border: 10px #333 solid;
+}
+#videoElement {
+    width: 500px;
+    height: 379px;
+    background-color: #666;
+}
+</style>
+    <style type="text/css">
+        .auto-style4 {
+            height: 90px;
+            width: 150px;
+        }
+        #t {
+            height: 150px;
+        }
+        #text {
+            width: 136px;
+            height: 30px;
+            background-color: #E2E4E9;
+        }
+      
+        td {
+            text-align:center;
+            font-size:30px;
+        }
+ 
+        .auto-style5 {
+            color: #FF0000;
+            font-size : 30px;
+            background-image:url("background.jpg");
+        }
+ 
+        .auto-style6 {
+            color: #FF66FF;
+            background-image:url("background.jpg");
+        }
+ 
+        .auto-style7 {
+            font-size: 35px;
+            color: #666699;
+            background-image:url("background.jpg");
+        }
+
+        .box {
+            color:#666699;
+            font-size:25px;
+        }
+        body{background-image:url('background.jpg');
+            height: 469px;
+        }
+        </style>
+</head>
+<body background-image:url("background.jpg");>
+    <form id="form1" runat="server">
+    <div align ="center" class="auto-style5" background-image:url("background.jpg");>
+        <br />
+        <span class="auto-style7">Remote Control</span><span class="auto-style6"><br />
+        </span><br />
+    </div>
+    <table id="t" border ="10" style="position:absolute;width:500px;height:200px;top:214px; right:908px">
+        <tr>
+            <td class="auto-style4">0</td>
+            <td class="auto-style4">1</td>
+            <td class="auto-style4">2</td>
+            <td class="auto-style4">3</td>
+            <td class="auto-style4">4</td>
+        </tr>
+            <td class="auto-style4">5</td>
+            <td class="auto-style4">6</td>
+            <td class="auto-style4">7</td>
+            <td class="auto-style4">8</td>
+            <td class="auto-style4">9</td>
+        <tr>
+            <td class="auto-style4">10</td>
+            <td class="auto-style4">11</td>
+            <td class="auto-style4">12</td>
+            <td class="auto-style4">13</td>
+            <td class="auto-style4">14</td>
+        </tr>
+            <td class="auto-style4">15</td>
+            <td class="auto-style4">16</td>
+            <td class="auto-style4">17</td>
+            <td class="auto-style4">18</td>
+            <td class="auto-style4">19</td>
+        </tr>
+            <td class="auto-style4">20</td>
+            <td class="auto-style4">21</td>
+            <td class="auto-style4">22</td>
+            <td class="auto-style4">23</td>
+            <td class="auto-style4">24</td>
+    </table>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+    </script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script>
+		var video_element=document.getElementById('video');
+		if(navigator.getUserMedia){ // opera应使用opera.getUserMedianow
+      		navigator.getUserMedia('video',success,error);  //success是回调函数,当然你也可以直接在此写一个匿名函数
+		}
+		function success(stream){
+            video_element.src=stream;
+		}
+	</script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        var socket = io();
+        socket.on('chat message', function (msg) {
+            $('#text').text(msg);
+            for (var i = 0; i < 3; i++) {
+                for (var j = 0; j < 3; j++) {
+                    var table = document.getElementById("t");
+                    var row = table.rows[i];
+                    var cell = row.cells[j];
+                    cell.style.backgroundColor = "#E2E4E9";
+                }
+            }
+            var id = document.getElementById("text").value;
+            var i = parseInt(id);
+            var a = Math.floor(i / 3);
+            var b = i % 3;
+            var table = document.getElementById("t");
+            var row = table.rows[a];
+            var cell = row.cells[b];
+            cell.style.backgroundColor = "red";
+        });
+    </script>
+    <div id="container" style="position:absolute;width:500px; top: 66px; left: 752px;">
+    <video autoplay="true" id="videoElement">
+     
+    </video>
+</div>
+    <div style="height: 900px">
+        <button type = "button" id = "Button1">start operating</button>
+        <button type = "button" id = "Button2">forward</button>
+        <button type = "button" id = "Button3">back</button>
+        <button type = "button" id = "Button4">left</button>
+        <button type = "button" id = "Button5">right</button>
+        <input type = "text" id = "changespeed"></input>
+        <button type = "button" id = "Button6">Submit</button>
+        <button type = "button" id = "Button7">Quit</button>    
+    </div>
+    </form>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        var socket = io();
+        $( "#Button1" ).click(function() {
+            alert("Start Operating");
+            socket.emit('chat message', 'p')
+        });
+        $( "#Button2" ).click(function() {
+            alert("Forward");
+            socket.emit('chat message', 'w')
+        });
+        $( "#Button3" ).click(function() {
+            alert("Backward");
+            socket.emit('chat message', 's')
+        });
+        $( "#Button4" ).click(function() {
+            alert("Left");
+            socket.emit('chat message', 'a')
+        });
+        $( "#Button5" ).click(function() {
+            alert("Right");
+            socket.emit('chat message', 'd')
+        });
+        $( "#Button6" ).click(function() {
+            alert($('#changespeed').val());
+            socket.emit('chat message', 's')
+            socket.emit('chat message', $('#changespeed').val()) 
+        });
+        $( "#Button7" ).click(function() {
+            alert("Quit");
+            socket.emit('chat message', 'j')
+        });
+        $(document).keypress(function(e) {
+            if(e.which == 13) {
+                alert('Start Operating');
+                socket.emit('chat message', 'p')
+            }
+            if(e.which == 119) {
+                alert('Forward');
+                socket.emit('chat message', 'w')
+            }
+            if(e.which == 115) {
+                alert('Backward');
+                socket.emit('chat message', 'x')
+            }
+            if(e.which == 100) {
+                alert('Right');
+                socket.emit('chat message', 'd')
+            }
+            if(e.which == 97) {
+                alert('Left');
+                socket.emit('chat message', 'a')
+            }
+            if(e.which == 101) {
+                alert('Quit');
+                socket.emit('chat message', 'j')
+            }
+        });
+    </script>
+</body>
+<html>

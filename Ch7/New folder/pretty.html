@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="stuff, to, help, search, engines, not" name="keywords">
+<meta content="What this page is about." name="description">
+<meta content="Display Webcam Stream" name="title">
+<title>Display Webcam Stream</title>
+  
+<style>
+</style>
+</head>
+    <table align="center" width="1000" height="800" border=1 bordercolor="#00ff99">
+<tbody>
+<tr><td width="50%" height="60%">localization</td>
+ <td width="50%" height="60%">
+    <video autoplay="true" id="videoElement">
+    </video>
+ </td>
+</tr>
+<tr><td width="60%" align="center">data</td>
+    <td width="40%" align="center">control key</td>
+</tr>
+</tbody>
+</table>
+<body>
+<div id="container" style="position:absolute;width:500px;bottom:20px;right:70px">
+    <video autoplay="true" id="videoElement">
+     
+    </video>
+</div>
+<script>
+//alert("sb");
+    var video = document.querySelector("#videoElement");
+ 
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+//navigator.getUserMedia = true;
+if (navigator.getUserMedia) {     
+    navigator.getUserMedia({video: true}, handleVideo, videoError);
+}
+function handleVideo(stream) {
+    alert("sb");
+    video.src = window.URL.createObjectURL(stream);
+}
+ 
+function videoError(e) {
+    alert("sb");
+    // do something
+}
+</script>
+</body>
+</html>
