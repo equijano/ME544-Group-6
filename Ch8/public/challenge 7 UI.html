@@ -1,0 +1,251 @@
+<!doctype html>
+<html class="no-js" lang="">
+<title>Remote Control</title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+        <title>Remote Control</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body class="bg-info">
+        <!--[if lte IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <header role ="banner">
+            <nav role="navigation">
+            </nav>
+        </header>
+        <main role="main">
+            <h1 align="center" class ="text-primary">Remote Control</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <h2 class ="text-primary">Map</h2>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                <td id = 1 class="text-primary" align="center">1</td>
+                                <td id = 16 class="text-primary" align="center">16</td>
+                                <td id = 15  class="text-primary" align="center">15</td>
+                                <td id = 14 class="text-primary" align="center">14</td>
+                                <td id = 13 class="text-primary" align="center">13</td>
+                                </tr>
+                                <td id = 2 class="text-primary" align="center">2</td>
+                                <td class="text-primary" align="center">x</td>
+                                <td class="text-primary" align="center">x</td>
+                                <td class="text-primary" align="center">x</td>
+                                <td id = 12 class="text-primary" align="center">12</td>
+                                <tr>
+                                <td id = 3 class="text-primary" align="center">3</td>
+                                <td class="text-primary" align="center">x</td>
+                                <td class="text-primary" align="center">x</td>
+                                <td class="text-primary" align="center">x</td>
+                                <td id = 11 class="text-primary" align="center">11</td>
+                                </tr>
+                                <td id = 4 class="text-primary" align="center">4</td>
+                                <td class="text-primary" align="center">x</td>
+                                <td class="text-primary" align="center"></td>
+                                <td class="text-primary" align="center">x</td>
+                                <td id = 10 class="text-primary" align="center">10</td>
+                                </tr>
+                                <td id = 5 class="text-primary" align="center">5</td>
+                                <td id = 6 class="text-primary" align="center">6</td>
+                                <td id = 7 class="text-primary" align="center">7</td>
+                                <td id = 8 class="text-primary" align="center">8</td>
+                                <td id = 9 class="text-primary" align="center">9</td>                            </table>
+                            <h4 class="text-primary">Now the crawler's position is:</h4>
+                        <div class="input-group">
+                         <input type="text" class="form-control" placeholder="Position" aria-describedby="basic-addon1" id = "text">
+                        </div>
+                        </div>
+                    
+                        <h2 class ="text-primary">Control</h2>
+                        <div class="col-sm-3">
+                            <br><button type="button" class="btn btn-primary btn-lg" id = "Button1">Start</button></br>
+                            <br><button type="button" class="btn btn-warning btn-lg" id = "Button7">Quit</button></br>
+                        
+                        </div>
+                        <div class="col-sm-7">
+                        <center>
+                        <br><button type="button" class="btn btn-success btn-lg" id = "Button2">
+                            <span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span></button></br>
+                        <br><button type="button" class="btn btn-success btn-lg" id = "Button4">
+                                <span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span></button>
+                            <button type="button" class="btn btn-success btn-lg" id = "Button6">Stop</button>
+                            <button type="button" class="btn btn-success btn-lg" id = "Button5">
+                                <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span></button>
+                            
+                        </br>
+                        <br><button type="button" class="btn btn-success btn-lg" id = "Button3">
+                        <span class="glyphicon glyphicon-hand-down" aria-hidden="true"></span></button></button></br>
+                        </center>
+                            
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <h2 class ="text-primary">Camera</h2>
+                        <div class="embed-responsive embed-responsive-4by3" id="container">
+                        <video autoplay="true" id="videoElement">
+                        </video>
+                        </div>
+                        
+                    </div>
+        </main>
+
+        <footer role ="contentinfo">
+            <p><small>Copyright &copy; EC 544 Group6</small></p>
+        </footer>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+
+
+
+
+
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+        var socket = io();
+        </script>
+        <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+
+
+    
+
+
+    <script>
+    var video = document.querySelector("#videoElement"); 
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+    //navigator.getUserMedia = true;
+    if (navigator.getUserMedia) {     
+        navigator.getUserMedia({video: true}, handleVideo, videoError);
+        }
+    function handleVideo(stream) {
+    video.src = window.URL.createObjectURL(stream);
+        }
+ 
+    function videoError(e) {
+    // do something
+    }
+    </script>
+
+
+
+
+
+
+
+
+
+
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+     <script>
+        var socket = io();
+        socket.on('chat message', function (msg) {
+            $('#text').text(msg);
+            for (var i = 0; i < 5; i++) {
+                for (var j = 0; j < 5; j++) {
+                    var table = document.getElementById("t");
+                    var row = table.rows[i];
+                    var cell = row.cells[j];
+                    cell.style.backgroundColor = "#E2E4E9";
+                }
+            }
+            var id = document.getElementById("text").value;
+            var cell = document.getElementById(id);
+            cell.style.backgroundColor = "red";
+        });
+    </script>
+
+
+
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        var socket = io();
+        $( "#Button1" ).click(function() {
+            alert("Start Operating");
+            socket.emit('chat message', 'p')
+        });
+        $( "#Button2" ).click(function() {
+            alert("Forward");
+            socket.emit('chat message', 'w')
+        });
+        $( "#Button3" ).click(function() {
+            alert("Backward");
+            socket.emit('chat message', 'x')
+        });
+        $( "#Button4" ).click(function() {
+            alert("Left");
+            socket.emit('chat message', 'a')
+        });
+        $( "#Button5" ).click(function() {
+            alert("Right");
+            socket.emit('chat message', 'd')
+        });
+        $( "#Button6" ).click(function() {
+            //alert($('#changespeed').val());
+            alert("Stop");
+            socket.emit('chat message', 's')
+            //socket.emit('chat message', $('#changespeed').val()) 
+        });
+        $( "#Button7" ).click(function() {
+            alert("Quit");
+            socket.emit('chat message', 'q')
+        });
+        $(document).keypress(function(e) {
+            if(e.which == 13) {
+                alert('Start Operating');
+                socket.emit('chat message', 'p')
+            }
+            if(e.which == 119) {
+                alert('Forward');
+                socket.emit('chat message', 'w')
+            }
+            if(e.which == 120) {
+                alert('Backward');
+                socket.emit('chat message', 'x')
+            }
+            if(e.which == 100) {
+                alert('Right');
+                socket.emit('chat message', 'd')
+            }
+            if(e.which == 97) {
+                alert('Left');
+                socket.emit('chat message', 'a')
+            }
+            if(e.which == 106) {
+                alert('Quit');
+                socket.emit('chat message', 'q')
+            }
+            if(e.which == 115) {
+                alert('Stop');
+                socket.emit('chat message', 's')
+            }
+        });
+    </script>
+    </body>
+</html>
