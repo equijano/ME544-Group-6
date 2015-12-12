@@ -272,6 +272,7 @@ void pTurn(){
   int val1 = readDistance();
   enableDisableSensor(5); // Turn on sensor attached to pin 2 and disable all others
   int val2 = readDistance();
+  delay(100);
   int average = (val1 + val2)/2;
   int middle_hall = 90;
   
@@ -280,7 +281,8 @@ void pTurn(){
   Serial.print("  Val2: ");
   Serial.println(val2);
   
-  if (val1>200 && val2>200){
+  //if (val1>200 && val2>200){
+    if (val1>400 || val2>400){
      middle_hall = 725;
   }
   
@@ -335,10 +337,15 @@ void pTurn(){
    i = -5;
    TurnLeft();
    }
-   if(val1>860 && val2>200){
+
+   if(val1>200 && val2>860){
    i = -5;
    TurnLeft();
    }
+   //if(val1>860 && val2>200){
+   //i = -5;
+   //TurnLeft();
+   //}
    
    if(val1==0 && val2==0){
    i = -5;
